@@ -19,16 +19,9 @@ void load_filters(int r, int c) {
 }
 
 
-int safe_row(int i) {
-    if (i < 0) return i + R;
-    if (i > R -1) return i - R;
-    //if (i < 0 || i > R -1) exit(0);
-    return i;
-}
-int safe_col(int i) {
-    if (i < 0) return i + C;
-    if (i > R -1) return i - C;
-    //if (i < 0 || i > C -1) exit(0);
+int safe(int i, int M) {
+    if (i < 0) return i + M;
+    if (i > M -1) return i - M;
     return i;
 }
 
@@ -36,8 +29,8 @@ int safe_col(int i) {
 real _filter(int i, int r, int c ) {
     real sum = 0;
     for (int piece_index = 0; piece_index < f[i].length; piece_index++) {
-        int row = safe_row(r + f[i].r[piece_index]);
-        int col = safe_col(c + f[i].c[piece_index]);
+        int row = safe(r + f[i].r[piece_index],R);
+        int col = safe(c + f[i].c[piece_index],C);
         sum += B[reading][row][col]*f[i].a[piece_index];
     }
     return tanh(sum);
