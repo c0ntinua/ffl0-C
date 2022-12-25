@@ -43,7 +43,7 @@ void apply_filter(int i) {
 } 
 
 
-void toggle_buffers() {reading = !reading;writing = !writing;}
+void toggle_buffers() {reading = !reading; writing = !writing;}
 
 
 

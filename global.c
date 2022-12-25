@@ -25,7 +25,7 @@ int writing = 1;
 real power = 2.0;
 int r_span =4;
 int c_span = 4;
-int num_filters =5;
+int num_filters =2;
 filter f[10];
 real B[2][R][C];
 real work_buffer[R][C];
