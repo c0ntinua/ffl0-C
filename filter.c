@@ -1,7 +1,4 @@
-
-
-filter random_filter(int r, int c) {
-    if ((2*r + 1)*(2*c + 1) > L) printf("\n\n\n\n\n!! max filter span exceeded !!\n\n\n\n\n");
+filter _random_filter(int r, int c) {
     filter new_filter;
     new_filter.length = (2*r + 1)*(2*c + 1);
     int piece_index =0;
@@ -14,10 +11,13 @@ filter random_filter(int r, int c) {
     return new_filter;
 }
 
-void load_filters(int r, int c) {
-    for (int i = 0; i < F; i++) f[i] = random_filter(rand()%r_span+1,rand()%c_span+1);
+filter random_filter() {
+    return _random_filter(rand()%r_span+1,rand()%c_span+1);
 }
 
+void load_filters(int r, int c) {
+    for (int i = 0; i < F; i++) f[i] = random_filter();
+}
 
 int safe(int i, int M) {
     if (i < 0) return i + M;
@@ -39,11 +39,8 @@ real _filter(int i, int r, int c ) {
 void apply_filter(int i) {
     for (int r = 0; r < R ; r++) 
         for (int c = 0; c < C ; c++)
-            B[writing][r][c] = _filter(i,r,c);
-} 
-
-
-void toggle_buffers() {reading = !reading; writing = !writing;}
+            B[!reading][r][c] = _filter(i,r,c);
+}
 
 
 
